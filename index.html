@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Proxy Web</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #101827;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .contenedor {
+      width: 100%;
+      max-width: 480px;
+      padding: 28px;
+      border-radius: 20px;
+      background: #1d293b;
+      box-shadow: 0 10px 35px #0005;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    p {
+      color: #cbd5e1;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    input {
+      border: 1px solid #64748b;
+      background: #0f172a;
+      color: white;
+    }
+
+    button {
+      border: none;
+      background: #22c55e;
+      color: #052e16;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .enlaces {
+      margin-top: 25px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .enlaces a {
+      display: block;
+      padding: 13px;
+      border-radius: 10px;
+      background: #334155;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .nota {
+      margin-top: 22px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="contenedor">
+    <h1>🌐 Mi Proxy Web</h1>
+
+    <p>Bienvenido a tu proyecto web personal.</p>
+
+    <form id="formulario">
+      <input
+        id="direccion"
+        type="url"
+        placeholder="https://ejemplo.com"
+        aria-label="Dirección web"
+        required
+      >
+      <button type="submit">Abrir página</button>
+    </form>
+
+    <div class="enlaces">
+      <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+        Buscar en Google
+      </a>
+      <a href="https://www.wikipedia.org" target="_blank" rel="noopener noreferrer">
+        Wikipedia
+      </a>
+    </div>
+
+    <p class="nota">
+      Esta página es una interfaz web. No es todavía un servidor proxy.
+    </p>
+  </main>
+
+  <script>
+    document.getElementById("formulario").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const campo = document.getElementById("direccion");
+      let direccion;
+
+      try {
+        direccion = new URL(campo.value.trim());
+
+        if (direccion.protocol !== "https:" && direccion.protocol !== "http:") {
+          throw new Error("Protocolo no permitido");
+        }
+      } catch {
+        alert("Introduce una dirección web válida, como https://ejemplo.com");
+        return;
+      }
+
+      window.open(direccion.href, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
